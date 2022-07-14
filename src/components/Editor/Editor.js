@@ -354,6 +354,7 @@ function Editor(props) {
   };
 
   const handleSubmission = () => {
+    // eslint-disable-next-line default-case
     switch (sections[activeSectionKey]) {
       case sections.basicInfo: {
         const tempDetail = {
@@ -561,11 +562,11 @@ function Editor(props) {
       summary: typeof activeInfo?.detail !== "object" ? activeInfo.detail : "",
       other: typeof activeInfo?.detail !== "object" ? activeInfo.detail : "",
     });
-  }, [activeSectionKey]);
+  }, [activeSectionKey, information, sections]);
 
   useEffect(() => {
     setActiveInformation(information[sections[activeSectionKey]]);
-  }, [information]);
+  }, [activeSectionKey, information, sections]);
 
   useEffect(() => {
     const details = activeInformation?.details;
@@ -587,7 +588,7 @@ function Editor(props) {
       github: activeInfo.details[activeDetailIndex]?.github || "",
       college: activeInfo.details[activeDetailIndex]?.college || "",
     });
-  }, [activeDetailIndex]);
+  }, [activeDetailIndex, activeInformation?.details, activeSectionKey, information, sections]);
 
   return (
     <div className={styles.container}>
